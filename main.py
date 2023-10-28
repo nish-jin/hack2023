@@ -2,6 +2,8 @@
 import json
 import car
 import sys
+import fiveG_simulator
+import mec_program
 
 def getJson(carObj):
     # call functions to retrieve the new sensor values
@@ -60,13 +62,20 @@ def createCar(fileName):
 
 def main():
     #setup environment
+    network = fiveG_simulator.fiveG_Network()
+    mec_calculator = mec_program.mec_obj(network)
+    network.ping('mec', mec_calculator)
+
     file = open(sys.argv[1], "r")
     nextLine = file.readline()
+    car_list = list()
     while nextLine != "":
-        carInstance = createCar(nextLine.strip())
-        jsonMessage = getJson(carInstance)
-        print(jsonMessage)
-        #TODO send brodcast
+        #build, add, and brodcast from car
+        car_list.append(createCar(nextLine.strip()))
+        network.ping((car_list(-1)).getId, car_list(-1))
+        jsonMessage = getJson(car_list(-1))
+        network.brodcast(jsonMessage)
+        
         nextLine = file.readline()
 
 # run main when run on command line 
