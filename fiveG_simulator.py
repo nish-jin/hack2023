@@ -10,11 +10,7 @@ class fiveG_Network:
         self.edge_list[id] = obj
 
     def broadcast(self, message):
-        self.send_message('mec')
-
-    def __publish_event(self, update):
-        #some weird variable pushing thing with inheritance?
-        return 0
+        self.send_message(message, 'mec')
 
     def send_message(self, message, dest_id):
         if dest_id in self.edge_list:
