@@ -3,7 +3,7 @@ class fiveG_Network:
 
     def __init__(self, mec_obj):
         self.mec = mec_obj
-        self.obu_list = set()
+        self.obu_list = dict()
 
     def brodcast(self, message):
         self.mec.input_message(message)
