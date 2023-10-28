@@ -5,7 +5,8 @@ class fiveG_Network:
         self.edge_list = dict()
 
     def ping(self, id, obj):
-        '''Adds a given object to the 'connected devices' list.'''
+        '''Adds a given object to the 'connected devices' list.
+        ID simulates an ip address.'''
         self.edge_list[id] = obj;
 
     def brodcast(self, message):
