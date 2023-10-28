@@ -3,10 +3,10 @@ import math
 
 CAR_WIDTH = 1
 CAR_LENGTH = 1
-THETA = 0
+THETA = 45
 
 def distance(voltage):
-    return voltage * 398.0 / 5
+    return (5 - voltage) * 398.0 / 5
 
 class Front:
     # TODO: Update
@@ -57,7 +57,7 @@ class LeftFront:
     def get(self):
         if self.voltage == 0:
             return [None, None]
-        return [self.x-math.cos(distance(self.voltage)),self.y+math.sin(distance(self.voltage))]
+        return [self.x-distance(self.voltage)*math.cos(THETA * math.pi / 180),self.y+distance(self.voltage)*math.sin(THETA * math.pi / 180)]
 
     def set(self):
         v = 0
@@ -76,7 +76,7 @@ class RightFront:
     def get(self):
         if self.voltage == 0:
             return [None, None]
-        return [self.x+math.cos(distance(self.voltage)),self.y+math.sin(distance(self.voltage))]
+        return [self.x+distance(self.voltage)*math.cos(THETA * math.pi / 180),self.y+distance(self.voltage)*math.sin(THETA * math.pi / 180)]
 
     def set(self):
         v = 0
@@ -133,7 +133,7 @@ class RightBack:
     def get(self):
         if self.voltage == 0:
             return [None, None]
-        return [self.x+math.cos(distance(self.voltage)),self.y-math.sin(distance(self.voltage))]
+        return [self.x+distance(self.voltage)*math.cos(THETA * math.pi / 180),self.y-distance(self.voltage)*math.sin(THETA * math.pi / 180)]
 
     def set(self):
         v = 0
@@ -152,7 +152,7 @@ class LeftBack:
     def get(self):
         if self.voltage == 0:
             return [None, None]
-        return [self.x-math.cos(distance(self.voltage)),self.y-math.sin(distance(self.voltage))]
+        return [self.x-distance(self.voltage)*math.cos(THETA * math.pi / 180),self.y-distance(self.voltage)*math.sin(THETA * math.pi / 180)]
 
     def set(self):
         v = 0
