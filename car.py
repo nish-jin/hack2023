@@ -22,7 +22,7 @@ class Front:
         return [self.x+0,self.y+distance(self.voltage)]
 
     def set(self, file):
-        nextLine = self.file.readline()
+        nextLine = file.readline()
         v = float(nextLine)
         # read data from file ????
         # set self.voltage to represent that value
@@ -42,7 +42,7 @@ class Back:
         return [self.x+0,self.y-distance(self.voltage)]
 
     def set(self, file):
-        nextLine = self.file.readline()
+        nextLine = file.readline()
         v = float(nextLine)
         # read data from file ????
         # set self.voltage to represent that value
@@ -62,7 +62,7 @@ class LeftFront:
         return [self.x-distance(self.voltage)*math.cos(THETA * math.pi / 180),self.y+distance(self.voltage)*math.sin(THETA * math.pi / 180)]
 
     def set(self, file):
-        nextLine = self.file.readline()
+        nextLine = file.readline()
         v = float(nextLine)
         # read data from file ????
         # set self.voltage to represent that value
@@ -82,7 +82,7 @@ class RightFront:
         return [self.x+distance(self.voltage)*math.cos(THETA * math.pi / 180),self.y+distance(self.voltage)*math.sin(THETA * math.pi / 180)]
 
     def set(self, file):
-        nextLine = self.file.readline()
+        nextLine = file.readline()
         v = float(nextLine)
         # read data from file ????
         # set self.voltage to represent that value
@@ -102,7 +102,7 @@ class RightMiddle:
         return [self.x+distance(self.voltage),0]
     
     def set(self, file):
-        nextLine = self.file.readline()
+        nextLine = file.readline()
         v = float(nextLine)
         # read data from file ????
         # set self.voltage to represent that value
@@ -122,7 +122,7 @@ class LeftMiddle:
         return [self.x-distance(self.voltage),0]
 
     def set(self, file):
-        nextLine = self.file.readline()
+        nextLine = file.readline()
         v = float(nextLine)
         # read data from file ????
         # set self.voltage to represent that value
@@ -142,7 +142,7 @@ class RightBack:
         return [self.x+distance(self.voltage)*math.cos(THETA * math.pi / 180),self.y-distance(self.voltage)*math.sin(THETA * math.pi / 180)]
 
     def set(self, file):
-        nextLine = self.file.readline()
+        nextLine = file.readline()
         v = float(nextLine)
         # read data from file ????
         # set self.voltage to represent that value
@@ -162,7 +162,7 @@ class LeftBack:
         return [self.x-distance(self.voltage)*math.cos(THETA * math.pi / 180),self.y-distance(self.voltage)*math.sin(THETA * math.pi / 180)]
 
     def set(self, file):
-        nextLine = self.file.readline()
+        nextLine = file.readline()
         v = float(nextLine)
         # read data from file ????
         # set self.voltage to represent that value
@@ -182,6 +182,7 @@ class Car:
         self.brakepercentage = 0
         self.speed = 0
         self.file = open(fileName, "r")
+        self.id = ""
 
     def getPosition(self):
         return self.position
@@ -239,6 +240,10 @@ class Car:
         # read data from file ????
         # set self.voltage to represent that value
         self.speed = speed 
+
+    def setId(self):
+        nextLine = self.file.readLine()
+        self.id = nextLine
 
     def setFront(self):
         self.front.set(self.file)

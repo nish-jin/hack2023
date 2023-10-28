@@ -36,7 +36,7 @@ def getJson(carObj):
     # convert into JSON:
     return json.dumps(message)
 
-def createCar():
+def createCar(fileName):
     carObj = car.Car(sys.argv[1])
 
     # call functions to tell sensors to read new values
@@ -51,13 +51,18 @@ def createCar():
     carObj.setSpeed()
     carObj.setPosition()
     carObj.setBrakePercentage()
+    carObj.setId()
 
     return carObj
 
 
 def main():
-    return 0
-        
+    file = open(sys.argv[1], "r")
+    nextLine = file.readline()
+    while nextLine != "":
+        carInstance = createCar(nextLine)
+        jsonMessage = getJson(carInstance)
+        print(jsonMessage)
 
 # run main when run on command line 
 if __name__ == '__main__':
