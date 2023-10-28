@@ -1,9 +1,15 @@
+# import math for sin and cos
+import math
 
+CAR_WIDTH = 1
+CAR_LENGTH = 1
+THETA = 0
 
 def distance(voltage):
     return voltage * 398.0 / 5
 
 class Front:
+    # TODO: Update
     def __init__(self,x,y):
         #self.object = False
         self.voltage = 0
@@ -11,14 +17,18 @@ class Front:
         self.y = y
 
     def get(self):
+        if self.voltage == 0:
+            return [None, None]
         return [self.x+0,self.y+distance(self.voltage)]
 
     def set(self):
+        v = 0
         # read data from file ????
         # set self.voltage to represent that value
-        return 0
+        self.voltage = v
 
 class Back:
+    # TODO: Update
     def __init__(self,x,y):
         #self.object = False
         self.voltage = 0
@@ -26,14 +36,18 @@ class Back:
         self.y = y
 
     def get(self):
-        return [self.x+0,self.y+distance(self.voltage)]
+        if self.voltage == 0:
+            return [None, None]
+        return [self.x+0,self.y-distance(self.voltage)]
 
     def set(self):
+        v = 0
         # read data from file ????
         # set self.voltage to represent that value
-        return 0
+        self.voltage = v
 
 class LeftFront:
+    # TODO: Update
     def __init__(self,x,y):
         #self.object = False
         self.voltage = 0
@@ -41,14 +55,18 @@ class LeftFront:
         self.y = y
 
     def get(self):
-        return [self.x+0,self.y+distance(self.voltage)]
+        if self.voltage == 0:
+            return [None, None]
+        return [self.x-math.cos(distance(self.voltage)),self.y+math.sin(distance(self.voltage))]
 
     def set(self):
+        v = 0
         # read data from file ????
         # set self.voltage to represent that value
-        return 0
+        self.voltage = v
 
 class RightFront:
+    # TODO: Update
     def __init__(self,x,y):
         #self.object = False
         self.voltage = 0
@@ -56,14 +74,18 @@ class RightFront:
         self.y = y
 
     def get(self):
-        return [self.x+0,self.y+distance(self.voltage)]
+        if self.voltage == 0:
+            return [None, None]
+        return [self.x+math.cos(distance(self.voltage)),self.y+math.sin(distance(self.voltage))]
 
     def set(self):
+        v = 0
         # read data from file ????
         # set self.voltage to represent that value
-        return 0
+        self.voltage = v
 
 class RightMiddle:
+    # TODO: Update
     def __init__(self,x,y):
         #self.object = False
         self.voltage = 0
@@ -71,14 +93,18 @@ class RightMiddle:
         self.y = y
 
     def get(self):
-        return [self.x+0,self.y+distance(self.voltage)]
-
+        if self.voltage == 0:
+            return [None, None]
+        return [self.x+distance(self.voltage),0]
+    
     def set(self):
+        v = 0
         # read data from file ????
         # set self.voltage to represent that value
-        return 0
+        self.voltage = v
 
 class LeftMiddle:
+    # TODO: Update
     def __init__(self,x,y):
         #self.object = False
         self.voltage = 0
@@ -86,14 +112,18 @@ class LeftMiddle:
         self.y = y
 
     def get(self):
-        return [self.x+0,self.y+distance(self.voltage)]
+        if self.voltage == 0:
+            return [None, None]
+        return [self.x-distance(self.voltage),0]
 
     def set(self):
+        v = 0
         # read data from file ????
         # set self.voltage to represent that value
-        return 0
+        self.voltage = v
 
 class RightBack:
+    # TODO: Update
     def __init__(self,x,y):
         #self.object = False
         self.voltage = 0
@@ -101,14 +131,18 @@ class RightBack:
         self.y = y
 
     def get(self):
-        return [self.x+0,self.y+distance(self.voltage)]
+        if self.voltage == 0:
+            return [None, None]
+        return [self.x+math.cos(distance(self.voltage)),self.y-math.sin(distance(self.voltage))]
 
     def set(self):
+        v = 0
         # read data from file ????
         # set self.voltage to represent that value
-        return 0
+        self.voltage = v
 
 class LeftBack:
+    # TODO: Update
     def __init__(self,x,y):
         #self.object = False
         self.voltage = 0
@@ -116,23 +150,38 @@ class LeftBack:
         self.y = y
 
     def get(self):
-        return [self.x+0,self.y+distance(self.voltage)]
+        if self.voltage == 0:
+            return [None, None]
+        return [self.x-math.cos(distance(self.voltage)),self.y-math.sin(distance(self.voltage))]
 
     def set(self):
+        v = 0
         # read data from file ????
         # set self.voltage to represent that value
-        return 0
+        self.voltage = v
 
 class Car:
     def __init__(self):
-        self.front = Front(0,1)
-        self.back = Back(0,-1)
-        self.leftFront = LeftFront(-1,1)
-        self.rightFront = RightFront(1,1)
-        self.rightMiddle = RightMiddle(1,0)
-        self.leftMiddle = LeftMiddle(-1,0)
-        self.rightBack = RightBack(1,-1)
-        self.leftBack = LeftBack(-1,-1)
+        self.front = Front(0,CAR_LENGTH/2)
+        self.back = Back(0,-CAR_LENGTH/2)
+        self.leftFront = LeftFront(-CAR_WIDTH/2,CAR_LENGTH/2)
+        self.rightFront = RightFront(CAR_WIDTH/2,CAR_LENGTH/2)
+        self.rightMiddle = RightMiddle(CAR_WIDTH/2,0)
+        self.leftMiddle = LeftMiddle(-CAR_WIDTH/2,0)
+        self.rightBack = RightBack(CAR_WIDTH/2,-CAR_LENGTH/2)
+        self.leftBack = LeftBack(-CAR_WIDTH/2,-CAR_LENGTH/2)
+        self.position = [0, 0]
+        self.brakePercentage = 0
+        self.speed = 0
+
+    def getPosition(self):
+        return self.position
+    
+    def getBrakePercentage(self):
+        return self.brakePercentage
+
+    def getSpeed(self):
+        return self.speed
 
     def getFront(self):
         return self.front.get()
@@ -158,6 +207,18 @@ class Car:
     def getRightBack(self):
         return self.rightback.get()
 
+    def setPosition(self):
+        # TODO: File thing
+        return 0
+    
+    def setBrakePercentage(self):
+        # TODO: File thing
+        return 0
+    
+    def setSpeed(self):
+        # TODO: File thing
+        return 0
+
     def setFront(self):
         self.front.set()
 
@@ -181,3 +242,7 @@ class Car:
 
     def setRightBack(self):
         self.rightback.set()
+
+def main():
+    # TODO: Update w/ main from SensorClasses.py
+    return 0
