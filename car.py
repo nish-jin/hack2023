@@ -182,7 +182,7 @@ class Car:
         self.brakepercentage = 0
         self.speed = 0
         self.file = open(fileName, "r")
-        self.id = ""
+        self.id = 0
 
     def getPosition(self):
         return self.position
@@ -246,7 +246,8 @@ class Car:
 
     def setId(self):
         nextLine = self.file.readline()
-        self.id = nextLine
+        id = int(nextLine)
+        self.id = id
 
     def setFront(self):
         self.front.set(self.file)

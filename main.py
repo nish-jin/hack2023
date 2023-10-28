@@ -72,11 +72,14 @@ def main():
     while nextLine != "":
         #build, add, and broadcast from car
         car_list.append(createCar(nextLine.strip()))
-        network.ping((car_list(-1)).getId, car_list(-1))
-        jsonMessage = getJson(car_list(-1))
+        network.ping((car_list[-1]).getId, car_list[-1])
+        jsonMessage = getJson(car_list[-1])
         network.broadcast(jsonMessage)
         
         nextLine = file.readline()
+
+    print(mec_calculator.message_cache)
+
 
 # run main when run on command line 
 if __name__ == '__main__':
