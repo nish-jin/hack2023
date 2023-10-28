@@ -62,7 +62,7 @@ def main():
     file = open(sys.argv[1], "r")
     nextLine = file.readline()
     while nextLine != "":
-        carInstance = createCar(nextLine)
+        carInstance = createCar(nextLine.strip())
         jsonMessage = getJson(carInstance)
         print(jsonMessage)
         nextLine = file.readline()
