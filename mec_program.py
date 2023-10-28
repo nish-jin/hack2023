@@ -8,7 +8,7 @@ class mec_obj:
 
     def input_message(self, message):
         #TODO check json name is right
-        self.message_cache[message['id']]
+        self.message_cache[message['id']] = message
         if self.mec_on:
             self.generate_output()
     

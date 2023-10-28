@@ -9,7 +9,7 @@ class fiveG_Network:
         ID simulates an ip address.'''
         self.edge_list[id] = obj
 
-    def brodcast(self, message):
+    def broadcast(self, message):
         self.send_message('mec')
 
     def __publish_event(self, update):
