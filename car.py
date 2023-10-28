@@ -3,8 +3,8 @@
 def distance(voltage):
     return voltage * 398.0 / 5
 
-Class Front:
-    __init__(self,x,y):
+class Front:
+    def __init__(self,x,y):
         #self.object = False
         self.voltage = 0
         self.x = x
@@ -16,9 +16,115 @@ Class Front:
     def set(self):
         # read data from file ????
         # set self.voltage to represent that value
+        return 0
 
-Class car:
-    __init__(self):
+class Back:
+    def __init__(self,x,y):
+        #self.object = False
+        self.voltage = 0
+        self.x = x
+        self.y = y
+
+    def get(self):
+        return [self.x+0,self.y+distance(self.voltage)]
+
+    def set(self):
+        # read data from file ????
+        # set self.voltage to represent that value
+        return 0
+
+class LeftFront:
+    def __init__(self,x,y):
+        #self.object = False
+        self.voltage = 0
+        self.x = x
+        self.y = y
+
+    def get(self):
+        return [self.x+0,self.y+distance(self.voltage)]
+
+    def set(self):
+        # read data from file ????
+        # set self.voltage to represent that value
+        return 0
+
+class RightFront:
+    def __init__(self,x,y):
+        #self.object = False
+        self.voltage = 0
+        self.x = x
+        self.y = y
+
+    def get(self):
+        return [self.x+0,self.y+distance(self.voltage)]
+
+    def set(self):
+        # read data from file ????
+        # set self.voltage to represent that value
+        return 0
+
+class RightMiddle:
+    def __init__(self,x,y):
+        #self.object = False
+        self.voltage = 0
+        self.x = x
+        self.y = y
+
+    def get(self):
+        return [self.x+0,self.y+distance(self.voltage)]
+
+    def set(self):
+        # read data from file ????
+        # set self.voltage to represent that value
+        return 0
+
+class LeftMiddle:
+    def __init__(self,x,y):
+        #self.object = False
+        self.voltage = 0
+        self.x = x
+        self.y = y
+
+    def get(self):
+        return [self.x+0,self.y+distance(self.voltage)]
+
+    def set(self):
+        # read data from file ????
+        # set self.voltage to represent that value
+        return 0
+
+class RightBack:
+    def __init__(self,x,y):
+        #self.object = False
+        self.voltage = 0
+        self.x = x
+        self.y = y
+
+    def get(self):
+        return [self.x+0,self.y+distance(self.voltage)]
+
+    def set(self):
+        # read data from file ????
+        # set self.voltage to represent that value
+        return 0
+
+class LeftBack:
+    def __init__(self,x,y):
+        #self.object = False
+        self.voltage = 0
+        self.x = x
+        self.y = y
+
+    def get(self):
+        return [self.x+0,self.y+distance(self.voltage)]
+
+    def set(self):
+        # read data from file ????
+        # set self.voltage to represent that value
+        return 0
+
+class Car:
+    def __init__(self):
         self.front = Front(0,1)
         self.back = Back(0,-1)
         self.leftFront = LeftFront(-1,1)
