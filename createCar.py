@@ -57,12 +57,14 @@ def createCar(fileName):
 
 
 def main():
+    #setup environment
     file = open(sys.argv[1], "r")
     nextLine = file.readline()
     while nextLine != "":
         carInstance = createCar(nextLine)
         jsonMessage = getJson(carInstance)
         print(jsonMessage)
+        #TODO send brodcast
 
 # run main when run on command line 
 if __name__ == '__main__':
