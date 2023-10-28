@@ -70,11 +70,11 @@ def main():
     nextLine = file.readline()
     car_list = list()
     while nextLine != "":
-        #build, add, and brodcast from car
+        #build, add, and broadcast from car
         car_list.append(createCar(nextLine.strip()))
         network.ping((car_list(-1)).getId, car_list(-1))
         jsonMessage = getJson(car_list(-1))
-        network.brodcast(jsonMessage)
+        network.broadcast(jsonMessage)
         
         nextLine = file.readline()
 
