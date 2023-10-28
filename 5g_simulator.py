@@ -7,7 +7,7 @@ class fiveG_Network:
     def ping(self, id, obj):
         '''Adds a given object to the 'connected devices' list.
         ID simulates an ip address.'''
-        self.edge_list[id] = obj;
+        self.edge_list[id] = obj
 
     def brodcast(self, message):
         self.send_message('mec')
