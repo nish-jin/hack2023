@@ -16,13 +16,14 @@ def getJson(carObj):
     speed = carObj.getSpeed()
     position = carObj.getPosition()
     brake_percentage = carObj.getBrakePercentage()
+    id = carObj.getId()
 
     # Create a JSON object w/ info 
     # a Python object (dict):
     message = {
         "front": front,
         "back": back,
-        "rightFront": left_front,
+        "rightFront": right_front,
         "leftFront": left_front,
         "rightMiddle": right_middle,
         "leftMiddle": left_middle,
@@ -30,14 +31,15 @@ def getJson(carObj):
         "leftBack": left_back,
         "position": position,
         "speed": speed,
-        "brakePercentage": brake_percentage
+        "brakePercentage": brake_percentage,
+        "id": id
     }
 
     # convert into JSON:
     return json.dumps(message)
 
 def createCar(fileName):
-    carObj = car.Car(sys.argv[1])
+    carObj = car.Car(fileName)
 
     # call functions to tell sensors to read new values
     carObj.setFront()
@@ -63,6 +65,7 @@ def main():
         carInstance = createCar(nextLine)
         jsonMessage = getJson(carInstance)
         print(jsonMessage)
+        nextLine = file.readline()
 
 # run main when run on command line 
 if __name__ == '__main__':

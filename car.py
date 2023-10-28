@@ -216,6 +216,9 @@ class Car:
 
     def getRightBack(self):
         return self.rightback.get()
+    
+    def getId(self):
+        return self.id
 
     def setPosition(self):
         nextLine = self.file.readline()
@@ -242,7 +245,7 @@ class Car:
         self.speed = speed 
 
     def setId(self):
-        nextLine = self.file.readLine()
+        nextLine = self.file.readline()
         self.id = nextLine
 
     def setFront(self):
