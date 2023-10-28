@@ -242,7 +242,3 @@ class Car:
 
     def setRightBack(self):
         self.rightback.set()
-
-def main():
-    # TODO: Update w/ main from SensorClasses.py
-    return 0
