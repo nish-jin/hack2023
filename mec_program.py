@@ -23,12 +23,12 @@ class mec_obj:
     
     def create_cars_matrix(self):
         for id, data in self.message_cache.items():
-            [x,y] = data["position"]
+            [y,x] = data["position"]
             self.cars = np.append(self.cars, [[x],[y]], axis = 1)
     
     def create_objects_matrix(self):
         for id, data in self.message_cache.items():
-            [x_base,y_base] = data["position"]
+            [y_base,x_base] = data["position"]
             names = ["front","back","leftMiddle","rightMiddle","leftFront","rightFront","leftBack","rightBack"]
             for label in names:
                 [x,y] = data[label]
