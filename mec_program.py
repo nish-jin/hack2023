@@ -36,40 +36,8 @@ class mec_obj:
                     x += x_base
                     y += y_base
                     self.objects = np.append(self.objects, [[x],[y]], axis = 1)
-            # [x,y] = data["back"]
-            # x += x_base
-            # y += y_base
-            # if x != None:
-            #     self.objects = np.append(self.objects, [[x],[y]], axis = 1)
-            # [x,y] = data["leftMiddle"]
-            # x += x_base
-            # y += y_base
-            # if x != None:
-            #     self.objects = np.append(self.objects, [[x],[y]], axis = 1)
-            # [x,y] = data["rightMiddle"]
-            # x += x_base
-            # y += y_base
-            # if x != None:
-            #     self.objects = np.append(self.objects, [[x],[y]], axis = 1)
-            # [x,y] = data["leftFront"]
-            # x += x_base
-            # y += y_base
-            # if x != None:
-            #     self.objects = np.append(self.objects, [[x],[y]], axis = 1)
-            # [x,y] = data["rightFront"]
-            # x += x_base
-            # y += y_base
-            # if x != None:
-            #     self.objects = np.append(self.objects, [[x],[y]], axis = 1)
-            # [x,y] = data["leftBack"]
-            # x += x_base
-            # y += y_base
-            # if x != None:
-            #     self.objects = np.append(self.objects, [[x],[y]], axis = 1)
-            # [x,y] = data["rightBack"]
-            # x += x_base
-            # y += y_base
-            # if x != None:
-            #     self.objects = np.append(self.objects, [[x],[y]], axis = 1)
-            
+
+
+
+
             
