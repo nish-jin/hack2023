@@ -62,7 +62,7 @@ def createCar(fileName):
     return carObj
 
 def plot(cars, objects):
-    plt.title("Car Graph") 
+    plt.title("MEC Road Representation") 
     plt.xlabel("Longtitude") 
     plt.ylabel("Latitude") 
     plt.scatter(objects[0,:], objects[1,:], color ="red")
