@@ -1,5 +1,4 @@
 
-import json
 import car
 import sys
 import fiveG_simulator
@@ -7,43 +6,9 @@ import mec_program
 import numpy as np 
 import matplotlib.pyplot as plt 
 
-def getJson(carObj):
-    # call functions to retrieve the new sensor values
-    front = carObj.getFront()
-    back = carObj.getBack()
-    left_front = carObj.getLeftFront()
-    left_middle = carObj.getLeftMiddle()
-    left_back = carObj.getLeftBack()
-    right_front = carObj.getRightFront()
-    right_middle = carObj.getRightMiddle()
-    right_back = carObj.getRightBack()
-    speed = carObj.getSpeed()
-    position = carObj.getPosition()
-    brake_percentage = carObj.getBrakePercentage()
-    id = carObj.getId()
-
-    # Create a JSON object w/ info 
-    # a Python object (dict):
-    message = {
-        "front": front,
-        "back": back,
-        "rightFront": right_front,
-        "leftFront": left_front,
-        "rightMiddle": right_middle,
-        "leftMiddle": left_middle,
-        "rightBack": right_back,
-        "leftBack": left_back,
-        "position": position,
-        "speed": speed,
-        "brakePercentage": brake_percentage,
-        "id": id
-    }
-
-    # convert into JSON:
-    return json.dumps(message)
-
 def createCar(fileName):
-    carObj = car.Car(fileName)
+    '''Builds a car object using an input file.'''
+    carObj = car.Car_mock(fileName)
 
     # call functions to tell sensors to read new values
     carObj.setFront()
@@ -62,11 +27,12 @@ def createCar(fileName):
     return carObj
 
 def main():
-    #setup environment
+    #setup network environment
     network = fiveG_simulator.fiveG_Network()
     mec_calculator = mec_program.mec_obj(network)
     network.ping('mec', mec_calculator)
 
+    #setup all the cars using a formatting file
     file = open(sys.argv[1], "r")
     nextLine = file.readline()
     car_list = list()
@@ -74,24 +40,13 @@ def main():
         #build, add, and broadcast from car
         car_list.append(createCar(nextLine.strip()))
         network.ping((car_list[-1]).getId(), car_list[-1])
-        jsonMessage = getJson(car_list[-1])
-        network.broadcast(jsonMessage)
+        car_list[-1].sendJson(network)
         
         nextLine = file.readline()
 
-    #mec_calculator.create_cars_matrix()
-    #mec_calculator.create_objects_matrix()
-    #print(mec_calculator.message_cache)
-
-
-    #re-send a car message to prompt response
+    #re-send a car message to prompt response from active mec
     mec_calculator.activate_mec()
-    network.broadcast(getJson(car_list[-1]))
-
-    # for k, v in mec_calculator.message_cache.items():
-    #     print(mec_calculator.findRelevantData(k))
-
-
+    car_list[-1].sendJson(network)
 
 
 # run main when run on command line 

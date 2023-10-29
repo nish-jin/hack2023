@@ -11,9 +11,7 @@ def distance(voltage):
     return (5 - voltage) * 398.0 / 5
 
 class Front:
-    # TODO: Update
     def __init__(self,x,y):
-        #self.object = False
         self.voltage = 0
         self.x = x
         self.y = y
@@ -26,14 +24,10 @@ class Front:
     def set(self, file):
         nextLine = file.readline()
         v = float(nextLine)
-        # read data from file ????
-        # set self.voltage to represent that value
         self.voltage = v
 
 class Back:
-    # TODO: Update
     def __init__(self,x,y):
-        #self.object = False
         self.voltage = 0
         self.x = x
         self.y = y
@@ -46,14 +40,10 @@ class Back:
     def set(self, file):
         nextLine = file.readline()
         v = float(nextLine)
-        # read data from file ????
-        # set self.voltage to represent that value
         self.voltage = v
 
 class LeftFront:
-    # TODO: Update
     def __init__(self,x,y):
-        #self.object = False
         self.voltage = 0
         self.x = x
         self.y = y
@@ -66,14 +56,10 @@ class LeftFront:
     def set(self, file):
         nextLine = file.readline()
         v = float(nextLine)
-        # read data from file ????
-        # set self.voltage to represent that value
         self.voltage = v
 
 class RightFront:
-    # TODO: Update
     def __init__(self,x,y):
-        #self.object = False
         self.voltage = 0
         self.x = x
         self.y = y
@@ -86,14 +72,10 @@ class RightFront:
     def set(self, file):
         nextLine = file.readline()
         v = float(nextLine)
-        # read data from file ????
-        # set self.voltage to represent that value
         self.voltage = v
 
 class RightMiddle:
-    # TODO: Update
     def __init__(self,x,y):
-        #self.object = False
         self.voltage = 0
         self.x = x
         self.y = y
@@ -106,14 +88,10 @@ class RightMiddle:
     def set(self, file):
         nextLine = file.readline()
         v = float(nextLine)
-        # read data from file ????
-        # set self.voltage to represent that value
         self.voltage = v
 
 class LeftMiddle:
-    # TODO: Update
     def __init__(self,x,y):
-        #self.object = False
         self.voltage = 0
         self.x = x
         self.y = y
@@ -126,14 +104,10 @@ class LeftMiddle:
     def set(self, file):
         nextLine = file.readline()
         v = float(nextLine)
-        # read data from file ????
-        # set self.voltage to represent that value
         self.voltage = v
 
 class RightBack:
-    # TODO: Update
     def __init__(self,x,y):
-        #self.object = False
         self.voltage = 0
         self.x = x
         self.y = y
@@ -146,14 +120,10 @@ class RightBack:
     def set(self, file):
         nextLine = file.readline()
         v = float(nextLine)
-        # read data from file ????
-        # set self.voltage to represent that value
         self.voltage = v
 
 class LeftBack:
-    # TODO: Update
     def __init__(self,x,y):
-        #self.object = False
         self.voltage = 0
         self.x = x
         self.y = y
@@ -166,11 +136,10 @@ class LeftBack:
     def set(self, file):
         nextLine = file.readline()
         v = float(nextLine)
-        # read data from file ????
-        # set self.voltage to represent that value
         self.voltage = v
 
-class Car:
+class Car_mock:
+    '''Simulates the data and behavior expected of a car in the network.'''
     def __init__(self, fileName):
         self.front = Front(0,CAR_LENGTH/2)
         self.back = Back(0,-CAR_LENGTH/2)
@@ -224,6 +193,7 @@ class Car:
         return self.id
 
     def setPosition(self):
+        #Converting from gps to cm
         nextLine = self.file.readline()
         lat = float(nextLine)
         lat = lat / 360 * 2 * math.pi * 637800000
@@ -231,22 +201,16 @@ class Car:
         nextLine = self.file.readline()
         long = float(nextLine)
         long = long / 360 * 2 * math.pi * 637800000
-        # read data from file ????
-        # set self.voltage to represent that value
         self.position = [lat, long]
     
     def setBrakePercentage(self):
         nextLine = self.file.readline()
         percent = float(nextLine)
-        # read data from file ????
-        # set self.voltage to represent that value
         self.brakepercentage = percent
     
     def setSpeed(self):
         nextLine = self.file.readline()
         speed = float(nextLine)
-        # read data from file ????
-        # set self.voltage to represent that value
         self.speed = speed 
 
     def setId(self):
@@ -277,10 +241,49 @@ class Car:
 
     def setRightBack(self):
         self.rightback.set(self.file)
+
+    def sendJson(self, network_connection):
+        '''Generates a JSON brodcast message for the given Car.'''
+        # call functions to retrieve the new sensor values
+        front = self.getFront()
+        back = self.getBack()
+        left_front = self.getLeftFront()
+        left_middle = self.getLeftMiddle()
+        left_back = self.getLeftBack()
+        right_front = self.getRightFront()
+        right_middle = self.getRightMiddle()
+        right_back = self.getRightBack()
+        speed = self.getSpeed()
+        position = self.getPosition()
+        brake_percentage = self.getBrakePercentage()
+        id = self.getId()
+
+        # Create a JSON object w/ info 
+        # a Python object (dict):
+        message = {
+            "front": front,
+            "back": back,
+            "rightFront": right_front,
+            "leftFront": left_front,
+            "rightMiddle": right_middle,
+            "leftMiddle": left_middle,
+            "rightBack": right_back,
+            "leftBack": left_back,
+            "position": position,
+            "speed": speed,
+            "brakePercentage": brake_percentage,
+            "id": id
+        }
+
+        # convert into JSON:
+        network_connection.broadcast(json.dumps(message))
     
     def input_message(self, message):
-        #print(self.id + ": " + message)
+        '''Accepts an input message from the network.'''
+        #convert JSON to py type
         translated = json.loads(message)
+
+        #extract object data from message and construct visual rep
         for coord in translated["data"]:
             x = coord[0]
             y = coord[1]
