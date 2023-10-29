@@ -9,7 +9,7 @@ class mec_obj:
         self.network = network
         self.cars = np.empty([2, 0])
         self.objects = np.empty([2,0])
-        self.masterlist = set()
+        self.masterlist = []
 
     def input_message(self, message):
         #TODO check json name is right
