@@ -9,6 +9,7 @@ class mec_obj:
         self.network = network
         self.cars = np.empty([2, 0])
         self.objects = np.empty([2,0])
+        self.masterlist = set()
 
     def input_message(self, message):
         #TODO check json name is right
@@ -25,6 +26,7 @@ class mec_obj:
         for id, data in self.message_cache.items():
             [y,x] = data["position"]
             self.cars = np.append(self.cars, [[x],[y]], axis = 1)
+            self.masterlist.append([x,y])
     
     def create_objects_matrix(self):
         for id, data in self.message_cache.items():
@@ -35,7 +37,16 @@ class mec_obj:
                 if x != None:
                     x += x_base
                     y += y_base
-                    self.objects = np.append(self.objects, [[x],[y]], axis = 1)
+                    self.masterlist.append([x,y])
+
+                    addVal = True
+                    for i in range(len(self.cars[0])):
+                        if x-2 <= self.cars[0,i]  <= x+2:
+                            if y-2 <= self.cars[1,i] <= y-2:
+                                addVal = False
+                                break
+                    if addVal:
+                        self.objects = np.append(self.objects, [[x],[y]], axis = 1)
 
 
 
