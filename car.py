@@ -279,13 +279,13 @@ class Car:
         self.rightback.set(self.file)
     
     def input_message(self, message):
-        print(self.id + ": " + message)
+        #print(self.id + ": " + message)
         translated = json.loads(message)
         for coord in translated["data"]:
             x = coord[0]
             y = coord[1]
             self.data = np.append(self.data, [[x],[y]], axis=1)
-        title = self.id + " Car Graph"
+        title = str(self.id) + " Car Graph"
         plt.title(title) 
         plt.xlabel("Longitude") 
         plt.ylabel("Latitude") 

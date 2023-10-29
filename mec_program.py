@@ -19,7 +19,7 @@ class mec_obj:
     
     def generate_output(self):
         for k, v in self.message_cache.items():
-            self.network.send_message(self.findRelevantData(k), k)
+            self.network.send_message(self.__findRelevantData(k), k)
             #print(self.findRelevantData(k))
 
     def activate_mec(self):
@@ -53,9 +53,9 @@ class mec_obj:
                         #self.objects = np.append(self.objects, [[x],[y]], axis = 1)
                         tempset.append([x,y])
             
-        self.clean_obj_matrix(tempset)
+        self.__clean_obj_matrix(tempset)
 
-    def clean_obj_matrix(self, objset):
+    def __clean_obj_matrix(self, objset):
         clusters = []
 
         #generate clusters within clusters

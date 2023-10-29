@@ -81,7 +81,7 @@ def main():
     while nextLine != "":
         #build, add, and broadcast from car
         car_list.append(createCar(nextLine.strip()))
-        network.ping((car_list[-1]).getId, car_list[-1])
+        network.ping((car_list[-1]).getId(), car_list[-1])
         jsonMessage = getJson(car_list[-1])
         network.broadcast(jsonMessage)
         
@@ -94,7 +94,9 @@ def main():
     plot(mec_calculator.cars, mec_calculator.objects)
 
     mec_calculator.activate_mec()
-    #TODO re-send a car message
+    #re-send a car message to prompt response
+    network.broadcast(getJson(car_list[-1]))
+
     # for k, v in mec_calculator.message_cache.items():
     #     print(mec_calculator.findRelevantData(k))
 
