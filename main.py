@@ -4,6 +4,8 @@ import car
 import sys
 import fiveG_simulator
 import mec_program
+import numpy as np 
+import matplotlib.pyplot as plt 
 
 def getJson(carObj):
     # call functions to retrieve the new sensor values
@@ -59,6 +61,13 @@ def createCar(fileName):
 
     return carObj
 
+def plot(cars, objects):
+    plt.title("Car graph") 
+    plt.xlabel("X axis") 
+    plt.ylabel("Y axis") 
+    plt.scatter(objects[0,:], objects[1,:], color ="red")
+    plt.scatter(cars[0,:], cars[1,:], color ="green")
+    plt.show()
 
 def main():
     #setup environment
@@ -78,7 +87,12 @@ def main():
         
         nextLine = file.readline()
 
+    mec_calculator.create_cars_matrix()
+    mec_calculator.create_objects_matrix()
     print(mec_calculator.message_cache)
+
+    plot(mec_calculator.cars, mec_calculator.objects)
+
 
 
 # run main when run on command line 

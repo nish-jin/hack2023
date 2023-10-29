@@ -223,9 +223,11 @@ class Car:
     def setPosition(self):
         nextLine = self.file.readline()
         lat = float(nextLine)
+        lat = lat / 360 * 2 * math.pi * 637800000
 
         nextLine = self.file.readline()
         long = float(nextLine)
+        long = long / 360 * 2 * math.pi * 637800000
         # read data from file ????
         # set self.voltage to represent that value
         self.position = [lat, long]
