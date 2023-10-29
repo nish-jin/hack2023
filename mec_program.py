@@ -41,8 +41,8 @@ class mec_obj:
 
                     addVal = True
                     for i in range(len(self.cars[0])):
-                        if x-2 <= self.cars[0,i]  <= x+2:
-                            if y-2 <= self.cars[1,i] <= y-2:
+                        if np.abs(self.cars[0,i] - x) <= 2:
+                            if np.abs(self.cars[0,i] - y) <= 2:
                                 addVal = False
                                 break
                     if addVal:
