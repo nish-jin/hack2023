@@ -292,4 +292,5 @@ class Car:
         plt.scatter([0], [0], color = "blue")
         plt.scatter(self.data[0,:], self.data[1,:], color ="red")
         plt.xlim(-150,150)
+        plt.annotate("You", (2, 2))
         plt.show()
