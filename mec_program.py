@@ -7,7 +7,7 @@ def plot(cars, objects):
     plt.xlabel("Longtitude") 
     plt.ylabel("Latitude") 
     plt.scatter(objects[0,:], objects[1,:], color ="red")
-    plt.scatter(cars[0,:], cars[1,:], color ="green")
+    plt.scatter(cars[0,:], cars[1,:], color ="blue")
     plt.show()
 
 class mec_obj:
