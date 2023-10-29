@@ -291,4 +291,5 @@ class Car:
         plt.ylabel("Latitude") 
         plt.scatter([0], [0], color = "blue")
         plt.scatter(self.data[0,:], self.data[1,:], color ="red")
+        plt.xlim(-150,150)
         plt.show()
