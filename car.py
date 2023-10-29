@@ -289,4 +289,6 @@ class Car:
         plt.title(title) 
         plt.xlabel("Longitude") 
         plt.ylabel("Latitude") 
+        plt.scatter([0], [0], color = "blue")
         plt.scatter(self.data[0,:], self.data[1,:], color ="red")
+        plt.show()

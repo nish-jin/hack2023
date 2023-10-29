@@ -92,13 +92,13 @@ class mec_obj:
             x_curr = self.cars[0,i]
             y_curr = self.cars[1,i]
             if np.abs(x_curr - x) <= 150 and (x != x_curr or y != y_curr):
-                relativeData.append((x_curr,y_curr))
+                relativeData.append((x_curr-x,y_curr-y))
 
         for i in range(len(self.objects[0])):
             x_curr = self.objects[0,i]
             y_curr = self.objects[1,i]
             if np.abs(x_curr - x) <= 150:
-                relativeData.append((x_curr,y_curr))
+                relativeData.append((x_curr-x,y_curr-y))
 
         return json.dumps({"data":relativeData})
         
