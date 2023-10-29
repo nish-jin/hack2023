@@ -78,3 +78,29 @@ class mec_obj:
         for cluster in clusters:
             temp = np.mean(cluster, axis = 0).reshape(-1,1)
             self.objects = np.append(self.objects, temp, axis=1)
+
+    def findRelevantData(self, id):
+        message = self.message_cache[id] 
+
+        relativeData = []
+        x = message["position"][0]
+        y = message["position"][1]
+        for i in range(len(self.cars[0])):
+            x_curr = self.cars[0,i]
+            y_curr = self.cars[1,i]
+            if np.abs(x_curr - x) <= 150 and (x != x_curr or y != y_curr):
+                relativeData.append((x_curr,y_curr))
+
+        for i in range(len(self.objects[0])):
+            x_curr = self.objects[0,i]
+            y_curr = self.objects[1,i]
+            if np.abs(x_curr - x) <= 150:
+                relativeData.append((x_curr,y_curr))
+
+        return relativeData
+        
+        
+
+
+            
+            

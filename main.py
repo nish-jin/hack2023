@@ -93,6 +93,10 @@ def main():
 
     plot(mec_calculator.cars, mec_calculator.objects)
 
+    for k, v in mec_calculator.message_cache.items():
+        print(mec_calculator.findRelevantData(k))
+
+
 
 
 # run main when run on command line 
