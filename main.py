@@ -94,7 +94,9 @@ def main():
     plot(mec_calculator.cars, mec_calculator.objects)
 
     for k, v in mec_calculator.message_cache.items():
+        print(k)
         print(mec_calculator.findRelevantData(k))
+        print()
 
 
 

@@ -83,8 +83,8 @@ class mec_obj:
         message = self.message_cache[id] 
 
         relativeData = []
-        x = message["position"][0]
-        y = message["position"][1]
+        y = message["position"][0]
+        x = message["position"][1]
         for i in range(len(self.cars[0])):
             x_curr = self.cars[0,i]
             y_curr = self.cars[1,i]
