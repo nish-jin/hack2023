@@ -285,7 +285,7 @@ class Car:
             x = coord[0]
             y = coord[1]
             self.data = np.append(self.data, [[x],[y]], axis=1)
-        title = str(self.id) + " Car Graph"
+        title = "Car ID " + str(self.id) + ": Road Graph"
         plt.title(title) 
         plt.xlabel("Longitude") 
         plt.ylabel("Latitude") 
