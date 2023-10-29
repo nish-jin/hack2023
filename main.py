@@ -61,14 +61,6 @@ def createCar(fileName):
 
     return carObj
 
-def plot(cars, objects):
-    plt.title("MEC Road Representation") 
-    plt.xlabel("Longtitude") 
-    plt.ylabel("Latitude") 
-    plt.scatter(objects[0,:], objects[1,:], color ="red")
-    plt.scatter(cars[0,:], cars[1,:], color ="green")
-    plt.show()
-
 def main():
     #setup environment
     network = fiveG_simulator.fiveG_Network()
@@ -87,14 +79,13 @@ def main():
         
         nextLine = file.readline()
 
-    mec_calculator.create_cars_matrix()
-    mec_calculator.create_objects_matrix()
-    print(mec_calculator.message_cache)
+    #mec_calculator.create_cars_matrix()
+    #mec_calculator.create_objects_matrix()
+    #print(mec_calculator.message_cache)
 
-    plot(mec_calculator.cars, mec_calculator.objects)
 
-    mec_calculator.activate_mec()
     #re-send a car message to prompt response
+    mec_calculator.activate_mec()
     network.broadcast(getJson(car_list[-1]))
 
     # for k, v in mec_calculator.message_cache.items():

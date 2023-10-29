@@ -2,6 +2,14 @@ import json
 import numpy as np 
 import matplotlib.pyplot as plt 
 
+def plot(cars, objects):
+    plt.title("MEC Road Representation") 
+    plt.xlabel("Longtitude") 
+    plt.ylabel("Latitude") 
+    plt.scatter(objects[0,:], objects[1,:], color ="red")
+    plt.scatter(cars[0,:], cars[1,:], color ="green")
+    plt.show()
+
 class mec_obj:
     def __init__(self, network):
         self.message_cache = dict()
@@ -18,6 +26,9 @@ class mec_obj:
             self.generate_output()
     
     def generate_output(self):
+        self.create_cars_matrix()
+        self.create_objects_matrix()
+        plot(self.cars, self.objects)
         for k, v in self.message_cache.items():
             self.network.send_message(self.__findRelevantData(k), k)
             #print(self.findRelevantData(k))
