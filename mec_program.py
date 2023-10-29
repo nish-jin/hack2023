@@ -100,7 +100,7 @@ class mec_obj:
             if np.abs(x_curr - x) <= 150:
                 relativeData.append((x_curr,y_curr))
 
-        return relativeData
+        return json.dumps({"data":relativeData})
         
         
 
