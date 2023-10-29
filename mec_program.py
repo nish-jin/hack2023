@@ -19,8 +19,8 @@ class mec_obj:
     
     def generate_output(self):
         for k, v in self.message_cache.items():
-            #TODO message
-            print(self.findRelevantData(k))
+            self.network.send_message(self.findRelevantData(k), k)
+            #print(self.findRelevantData(k))
 
     def activate_mec(self):
         self.mec_on = True
