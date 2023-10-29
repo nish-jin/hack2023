@@ -29,6 +29,7 @@ class mec_obj:
             self.masterlist.append([x,y])
     
     def create_objects_matrix(self):
+        tempset = []
         for id, data in self.message_cache.items():
             [y_base,x_base] = data["position"]
             names = ["front","back","leftMiddle","rightMiddle","leftFront","rightFront","leftBack","rightBack"]
@@ -42,13 +43,38 @@ class mec_obj:
                     addVal = True
                     for i in range(len(self.cars[0])):
                         if np.abs(self.cars[0,i] - x) <= 2:
-                            if np.abs(self.cars[0,i] - y) <= 2:
+                            if np.abs(self.cars[1,i] - y) <= 2:
                                 addVal = False
                                 break
                     if addVal:
-                        self.objects = np.append(self.objects, [[x],[y]], axis = 1)
-
-
-
-
+                        #self.objects = np.append(self.objects, [[x],[y]], axis = 1)
+                        tempset.append([x,y])
             
+        self.clean_obj_matrix(tempset)
+
+    def clean_obj_matrix(self, objset):
+        clusters = []
+
+        #generate clusters within clusters
+        while len(objset) != 0:
+            clusters.append([])
+            clusters[-1].append(objset.pop())
+
+            addIndex = 0
+            #loop until no points are close enough to add
+            while addIndex != -1:
+                addIndex = -1
+                #search for next point to add
+                for i in range(len(objset)):
+                    #objset is [[x,y], ...] - clusters is [ [[x,y], ...], [...], ...]
+                    if np.abs(objset[i][0] - clusters[-1][0][0]) <= 4:
+                        if np.abs(objset[i][1] - clusters[-1][0][1]) <= 4:
+                            addIndex = i
+                            break
+                if addIndex >= 0:
+                    clusters[-1].append(objset.pop(addIndex))
+
+        #average the points in each cluster and make the object list
+        for cluster in clusters:
+            temp = np.mean(cluster, axis = 0).reshape(-1,1)
+            self.objects = np.append(self.objects, temp, axis=1)
