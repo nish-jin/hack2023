@@ -62,9 +62,9 @@ def createCar(fileName):
     return carObj
 
 def plot(cars, objects):
-    plt.title("Car graph") 
-    plt.xlabel("X axis") 
-    plt.ylabel("Y axis") 
+    plt.title("Car Graph") 
+    plt.xlabel("Longtitude") 
+    plt.ylabel("Latitude") 
     plt.scatter(objects[0,:], objects[1,:], color ="red")
     plt.scatter(cars[0,:], cars[1,:], color ="green")
     plt.show()

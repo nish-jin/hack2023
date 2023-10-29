@@ -1,6 +1,8 @@
 # import math for sin and cos
 import math
-
+import json
+import numpy as np 
+import matplotlib.pyplot as plt 
 CAR_WIDTH = 1
 CAR_LENGTH = 1
 THETA = 45
@@ -183,6 +185,7 @@ class Car:
         self.speed = 0
         self.file = open(fileName, "r")
         self.id = 0
+        self.data = np.empty([2,0])
 
     def getPosition(self):
         return self.position
@@ -274,3 +277,16 @@ class Car:
 
     def setRightBack(self):
         self.rightback.set(self.file)
+    
+    def input_message(self, message):
+        print(self.id + ": " + message)
+        translated = json.loads(message)
+        for coord in translated["data"]:
+            x = coord[0]
+            y = coord[1]
+            self.data = np.append(self.data, [[x],[y]], axis=1)
+        title = self.id + " Car Graph"
+        plt.title(title) 
+        plt.xlabel("Longitude") 
+        plt.ylabel("Latitude") 
+        plt.scatter(self.data[0,:], self.data[1,:], color ="red")
