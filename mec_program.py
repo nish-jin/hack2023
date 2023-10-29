@@ -12,15 +12,18 @@ class mec_obj:
         self.masterlist = []
 
     def input_message(self, message):
-        #TODO check json name is right
         translated = json.loads(message)
         self.message_cache[translated['id']] = translated
         if self.mec_on:
             self.generate_output()
     
     def generate_output(self):
-        #TODO calc responses and use self.network.send_message()
-        return 0
+        for k, v in self.message_cache.items():
+            #TODO message
+            print(self.findRelevantData(k))
+
+    def activate_mec(self):
+        self.mec_on = True
     
     def create_cars_matrix(self):
         for id, data in self.message_cache.items():
@@ -79,7 +82,7 @@ class mec_obj:
             temp = np.mean(cluster, axis = 0).reshape(-1,1)
             self.objects = np.append(self.objects, temp, axis=1)
 
-    def findRelevantData(self, id):
+    def __findRelevantData(self, id):
         message = self.message_cache[id] 
 
         relativeData = []

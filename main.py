@@ -93,8 +93,10 @@ def main():
 
     plot(mec_calculator.cars, mec_calculator.objects)
 
-    for k, v in mec_calculator.message_cache.items():
-        print(mec_calculator.findRelevantData(k))
+    mec_calculator.activate_mec()
+    #TODO re-send a car message
+    # for k, v in mec_calculator.message_cache.items():
+    #     print(mec_calculator.findRelevantData(k))
 
 
 
